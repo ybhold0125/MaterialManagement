@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>物资管理系统</title>
+    <script>
+        var userinfo = {
+            position:{{ position }},
+            id:{{ id }}
+        }
+    </script>
+    <link rel="stylesheet" href="../static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/layui-v2.5.6/layui/css/layui.css">
+</head>
+<body>
+    <div class="title">
+        <div class="row ">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 top">物资管理系统</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><div class="top rightself" id="title"></div></div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 top ">
+                <a type="button" class="layui-btn layui-btn-primary" href="#" id="modify-btn">修改密码</a>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 top">
+                <a type="button" class="layui-btn layui-btn-primary" href="#" id="logout-btn">登出</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="row ">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <div class="layui-tab layui-tab-brief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" id="planManager">计划管理</li>
+                        <li id="buyManager">物资采购管理</li>
+                        <li id="wareManager">仓储运输管理</li>
+                        <li id="supplier">供应商关系管理</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item" id="planManager0">
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">采购计划</div>
+
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">订单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入订单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchPlan0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">采购员编号：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入采购员编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchPlan1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>订单编号</th>
+                                        <th>物资编号</th>
+                                        <th>物资名称</th>
+                                        <th>物资规格</th>
+                                        <th>数量</th>
+                                        <th>单价</th>
+                                        <th>总价</th>
+                                        <th>采购员编号</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="planData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-plan">
+                                    增加
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item" id="buyManager0">
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">已采购订单</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">订单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入订单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchPurchasedMaterial0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">采购员编号：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入采购员编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchPurchasedMaterial1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>订单编号</th>
+                                        <th>物资编号</th>
+                                        <th>物资名称</th>
+                                        <th>物资规格</th>
+                                        <th>数量</th>
+                                        <th>单价</th>
+                                        <th>总价</th>
+                                        <th>采购员编号</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="PurchasedMaterialData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn control" role="button" href="#" id="add-btn-purchasedmaterial">
+                                    增加
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="layui-tab-item" id="wareManager0">
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">库存物资</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入物资编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchStockMaterials0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">名称：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入物资名称查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchStockMaterials1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>物资编号</th>
+                                        <th>物资名称</th>
+                                        <th>物资规格</th>
+                                        <th>物资单价</th>
+                                        <th>物资供应商</th>
+                                        <th>当前库存量</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="stockMaterialsData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-stock">
+                                    增加
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">入库表单</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">入库单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入入库单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchStorageMaterials0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">物资编号：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输物资编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchStorageMaterials1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>入库单编号</th>
+                                        <th>入库物资编号</th>
+                                        <th>入库物资名称</th>
+                                        <th>入库时间</th>
+                                        <th>入库物资量</th>
+                                        <th>经办人</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="storageMaterialsData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-storage">
+                                    增加
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">出库表单</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">出库单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入出库单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchOutboundMaterials0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">物资编号：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入物资编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchOutboundMaterials1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>出库单编号</th>
+                                        <th>出库物资编号</th>
+                                        <th>出库物资名称</th>
+                                        <th>出库时间</th>
+                                        <th>出库数量</th>
+                                        <th>经办人</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="outboundData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-outbound">
+                                    增加
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">退库表单</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">退库单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入退库单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchReturnedMaterials0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">物资编号：</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入退库物资编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchReturnedMaterials1">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                        </form>
+                                    </div>
+                                    <div  class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>订单编号</th>
+                                        <th>退库物资编号</th>
+                                        <th>退库物资名称</th>
+                                        <th>退库时间</th>
+                                        <th>退库数量</th>
+                                        <th>经办人</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="returnedData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-returned">
+                                    增加
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="layui-tab-item" id="supplier0">
+                            <div style="border:solid 1px #f2f2f2">
+                                <div class="header">
+                                    <h3>
+                                        <div class="self">发货表单</div>
+                                    </h3>
+                                </div>
+                                <div class="row top">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="layui-form">
+                                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                 <div class="layui-form-item">
+                                                    <label class="layui-form-label weight">发货单编号:</label>
+                                                    <div class="layui-input-inline">
+                                                    <input type="text" name="number" required  lay-verify="required" placeholder="请输入发货单编号查询" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button type="button" class="layui-btn" lay-submit lay-filter="formSearchDeliveryMaterials0">
+                                                    查询
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>发货单编号</th>
+                                        <th>物资编号</th>
+                                        <th>物资名称</th>
+                                        <th>物资数量</th>
+                                        <th>总价</th>
+                                        <th>发货时间</th>
+                                        <th>供应商名称</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="deliveryData">
+
+                                    </tbody>
+                                </table>
+                                <!-- Button trigger modal -->
+                                <a type="button" class="layui-btn" href="#" id="add-btn-delivery">
+                                    增加
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+     <!-- Modal -->
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
+                </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="../static/js/jquery-2.1.4.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/layui-v2.5.6/layui/layui.js"></script>
+    <script src="../static/js/main.js"></script>
+
+</body>
+
+<style>
+    .header{
+        height:40px;
+        background-color: #393D49;
+        color: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    .self{
+        padding-top: 5px;
+        padding-left: 4px;
+    }
+
+    .title{
+        height:75px;
+        background-color: #393D49;
+        color: #FFFFFF;
+        font-size:25px;
+    }
+    .top{
+        margin-top: 20px;
+    }
+    .weight{
+        padding-left: 1px;
+        white-space: nowrap;
+    }
+    .rightself{
+        padding-left: 90px;
+    }
+</style>
+</html>
